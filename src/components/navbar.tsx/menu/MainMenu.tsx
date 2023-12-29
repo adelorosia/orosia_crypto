@@ -3,7 +3,7 @@ import MaxWithWrapper from "@/components/wrapper/MaxWithWrapper";
 import { ImSearch } from "react-icons/im";
 import Brand from "../brand/Brand";
 import MenuItems, { MENU_ITEMS } from "./MenuItems";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import { IoMdLogIn } from "react-icons/io";
@@ -12,9 +12,11 @@ import { useState } from "react";
 import ScreenSmall from "./ScreenSmall";
 
 const MainMenu = () => {
+  const router=useRouter()
   const pathName = usePathname();
   const [isSearchBoxActive, setIsSearchBoxActive] = useState(false);
   const [isScreenMenu, setIsScreenMenu] = useState(false);
+
   return (
     <>
       <MaxWithWrapper className="flex items-center py-4">
@@ -51,6 +53,7 @@ const MainMenu = () => {
                 const isActive = pathName.startsWith(items.href);
                 return (
                   <MenuItems
+                  setIsScreenMenu={setIsScreenMenu}
                     isActive={isActive}
                     menuItem={items}
                     key={items.title}
@@ -63,15 +66,15 @@ const MainMenu = () => {
             <Brand isScreenMenu={isScreenMenu}/>
           </div>
           <div>
-            <Button variant="outline" className="hidden lg:flex font-Viga">
+            <Button variant="outline" className="hidden lg:flex font-Viga" onClick={()=>{router.push("/login")}}>
               Login/Register
             </Button>
-            <IoMdLogIn className="w-7 h-7 lg:hidden cursor-pointer" />
+            <IoMdLogIn className="w-7 h-7 lg:hidden cursor-pointer text-primary" onClick={()=>router.push("/login")}/>
           </div>
         </div>
       </MaxWithWrapper>
       <div className={`${isScreenMenu?"flex":"hidden"}`}>
-        <ScreenSmall setIsScreenMenu={setIsScreenMenu}/>
+        <ScreenSmall isScreenMenu={isScreenMenu} setIsScreenMenu={setIsScreenMenu}/>
       </div>
     </>
   );

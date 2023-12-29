@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BiLogoSlack } from "react-icons/bi";
+import { string } from "yup";
 
 interface IBrandProps{
-    isScreenMenu:boolean
+    isScreenMenu?:boolean
 }
 const Brand = ({isScreenMenu}:IBrandProps) => {
     return (

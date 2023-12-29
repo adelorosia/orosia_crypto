@@ -1,6 +1,6 @@
 import MaxWithWrapper from "@/components/wrapper/MaxWithWrapper";
 
-const page = () => {
+const MainPage = () => {
     return (
         <MaxWithWrapper>
             <h1>Adel</h1>
@@ -11,4 +11,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default MainPage;
