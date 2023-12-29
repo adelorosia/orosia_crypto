@@ -32,7 +32,7 @@ const router=useRouter()
         </div>
 
 <div className="flex flex-col">
-  <div className="flex justify-between items-center bg-white rounded-lg px-3 my-2 py-3">
+  <div className="flex justify-between items-center bg-background/80 rounded-lg px-3 my-1 py-3">
     <Brand />
     <IoClose className="text-3xl cursor-pointer" onClick={()=>router.push("/")}/>
   </div>
@@ -59,7 +59,7 @@ const router=useRouter()
               Register
             </button>
           </div>
-          <div className="w-full flex flex-col bg-white my-3 px-4 py-8 rounded-md border shadow-lg">
+          <div className="w-full flex flex-col bg-white my-1 px-4 py-8 rounded-md border shadow-lg">
             <Login
               className={`${isActiveTab ? "hidden" : "block"}`}
             />
