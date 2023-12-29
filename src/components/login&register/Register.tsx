@@ -3,6 +3,9 @@ import { cn } from "@/lib/utils";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Button } from "../ui/button";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/features/store";
+import { registerApiUser } from "@/features/slices/authSlice";
 
 interface IRegister {
   className: string;
@@ -11,21 +14,27 @@ interface IRegister {
 const formSchema = Yup.object({
   firstName: Yup.string().required("Your Firstname is mandatory"),
   lastName: Yup.string().required("Your Lastname is mandatory"),
+  userName: Yup.string().required("Your Username is mandatory"),
   email: Yup.string().email().required("Your Email is mandatory"),
   password: Yup.string()
     .required("Your Password is mandatory")
     .min(6, "Password must be at least 6 characters long"),
 });
 const Register = ({ className, setIsActiveTab }: IRegister) => {
+  const dispatch=useDispatch<AppDispatch>()
   const formik = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
+      userName:"",
       email: "",
       password: "",
     },
 
-    onSubmit: async (values) => {},
+    onSubmit: async (values) => {
+      await dispatch(registerApiUser(values))
+      console.log("first")
+    },
     validationSchema: formSchema,
   });
   return (
@@ -50,7 +59,7 @@ const Register = ({ className, setIsActiveTab }: IRegister) => {
       <div className="flex flex-col gap-2 mb-3">
         <label className="text-sm">{`${
           formik.touched.lastName && formik.errors.lastName
-            ? formik.errors.firstName
+            ? formik.errors.lastName
             : "Last Name"
         }`}</label>
         <Input
@@ -61,6 +70,22 @@ const Register = ({ className, setIsActiveTab }: IRegister) => {
           value={formik.values.lastName}
           onChange={formik.handleChange("lastName")}
           onBlur={formik.handleBlur("lastName")}
+        />
+      </div>
+      <div className="flex flex-col gap-2 mb-3">
+        <label className="text-sm">{`${
+          formik.touched.userName && formik.errors.userName
+            ? formik.errors.userName
+            : "Username"
+        }`}</label>
+        <Input
+          className={`${formik.errors.userName && "outline outline-red-500"}`}
+          type="text"
+          placeholder="Username"
+          name="userName"
+          value={formik.values.userName}
+          onChange={formik.handleChange("userName")}
+          onBlur={formik.handleBlur("userName")}
         />
       </div>
       <div className="flex flex-col gap-2 mb-3">

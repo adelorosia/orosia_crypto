@@ -32,7 +32,7 @@ const router=useRouter()
         </div>
 
 <div className="flex flex-col">
-  <div className="flex justify-between items-center bg-background/80 rounded-lg px-3 my-1 py-3">
+  <div className="flex justify-between items-center bg-background/80 rounded-lg px-3 mb-1 py-3">
     <Brand />
     <IoClose className="text-3xl cursor-pointer" onClick={()=>router.push("/")}/>
   </div>

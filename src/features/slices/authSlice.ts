@@ -13,7 +13,7 @@ interface IAuthState {
 }
 
 const authAdapter = createEntityAdapter({
-  selectId: (user: IUser) => user._id,
+  selectId: (user: IUser) => user?._id || "",
 });
 
 const initialState: IAuthState & EntityState<IUser> =
